@@ -1,0 +1,6 @@
+## Title: SimpleClock
+## APIVersion: 101035
+## Author: @moshulu
+
+SimpleClock.lua
+SimpleClock.xml
