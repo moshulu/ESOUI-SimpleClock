@@ -1,12 +1,12 @@
 <GuiXml>
   <Controls>
-    <TopLevelControl name="FooAddonIndicator">
+    <TopLevelControl name="SimpleClock">
       <Dimensions x="64" y="64" />
          <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="TOPLEFT" offsetX="0" offsetY="10"/>
  
       <Controls>
       
-        <Label name="$(parent)Label" width="64" height="64 " font="ZoFontEdit" inheritAlpha="true" color="FFFFFF"
+        <Label name="$(parent)Label" width="64" height="64 " font="" inheritAlpha="true" color="FFFFFF"
             wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="LEFT">
           <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOP" />
         </Label>

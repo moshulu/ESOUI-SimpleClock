@@ -2,5 +2,8 @@
 ## APIVersion: 101036
 ## Author: @moshulu
 
+## DependsOn: LibAddonMenu-2.0
+## SavedVariables: SimpleClockVars
+
 SimpleClock.lua
 SimpleClock.xml
