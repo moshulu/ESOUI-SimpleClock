@@ -6,10 +6,12 @@ local savedVariables
 
 local function ShowClock()
    SimpleClockLabel:SetHidden(false)
+   savedVariables.visible = true
 end
 
 local function HideClock()
    SimpleClockLabel:SetHidden(true)
+   savedVariables.visible = false
 end
 
 local function clock()
@@ -19,14 +21,10 @@ local function clock()
 end
 
 local function getFontSize()
-   d("getfontsize")
-   d(savedVariables.fontSize)
    return savedVariables.fontSize
 end
 
 local function setFontSize(v)
-   d("setfontsize")
-   d(savedVariables.fontSize)
    local value = v
 
    local case = {
@@ -85,8 +83,20 @@ local function setFontColor(r, g, b, a)
    savedVariables.fontColor.a = a
 end
 
-local function initializeSimpleClockAddon()
+local function setVisibility(v)
+   if(v == true) then
+      ShowClock()
+   else
+      HideClock()
+   end
+end
 
+local function getVisibility()
+   return savedVariables.visible
+end
+
+local function initializeSimpleClockAddon()
+   setVisibility(savedVariables.visible)
    setFontSize(savedVariables.fontSize)
    setFont(savedVariables.font)
    setFontColor(
@@ -107,6 +117,14 @@ local function initializeSimpleClockAddon()
    
    local optionsData = {
          [1] = {
+            type = "checkbox",
+            name = "Visible",
+            tooltip = "Shows or hides the clock.",
+            getFunc = function() return getVisibility() end,
+            setFunc = function(value) setVisibility(value) end
+
+         },
+         [2] = {
             type = "dropdown",
             name = "Font",
             tooltip = "The font of the clock.",
@@ -124,7 +142,7 @@ local function initializeSimpleClockAddon()
             getFunc = function() return getFont() end,
             setFunc = function(value) setFont(value) end,
       },
-      [2] = {
+      [3] = {
            type = "slider",
            name = "Font size",
            tooltip = "The font size of the clock",
@@ -133,7 +151,7 @@ local function initializeSimpleClockAddon()
            min = 8,
            max = 40
       },
-      [3] = {
+      [4] = {
            type = "colorpicker",
            name = "Font color",
            tooltip = "The color of the font of the clock.",
@@ -158,7 +176,8 @@ function SimpleClock.OnAddOnLoaded(event, name)
          g = 255,
          b = 255,
          a = 255,
-      }
+      },
+      visible = true
    }
    savedVariables = ZO_SavedVars:NewAccountWide("SimpleClockVars", 3, nil, defaults)
 
