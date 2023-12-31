@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- simple types -->
+    <xs:simpleType name="bool">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="integer">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="LuaVariable"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+
+    <xs:simpleType name="number">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="LuaVariable"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:decimal"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+
+    <xs:simpleType name="string">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="LuaVariable">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?[a-zA-Z_][0-9a-zA-Z_]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="InteractionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WAIT"/>
+            <xs:enumeration value="RUN_ANYWAY"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="LuaFunction">
+        <xs:annotation>
+            <xs:documentation>
+                local self, keybind = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string"/>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- container elements -->
+    <xs:complexType name="AllowAction">
+        <xs:attribute name="name" type="string"/>
+    </xs:complexType>
+
+    <xs:complexType name="BlockAction">
+        <xs:attribute name="name" type="string"/>
+    </xs:complexType>
+
+    <xs:complexType name="BlockKey">
+        <xs:attribute name="key" type="string"/>
+    </xs:complexType>
+
+    <xs:complexType name="Action">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Down" type="LuaFunction"/>
+            <xs:element name="Up" type="LuaFunction"/>
+        </xs:choice>
+        <xs:attribute name="name" type="string"/>
+        <xs:attribute name="inheritsBindFrom" type="string"/>
+        <xs:attribute name="rebindable" type="bool"/>
+        <xs:attribute name="hideAction" type="bool"/>
+        <xs:attribute name="holdAndChordInteraction" type="InteractionType"/>
+        <xs:attribute name="preventAutomaticInputModeChange" type="bool"/>
+    </xs:complexType>
+
+    <xs:complexType name="Category">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Action" type="Action"/>
+            <xs:element name="AllowAction" type="AllowAction"/>
+            <xs:element name="BlockAction" type="BlockAction"/>
+        </xs:choice>
+        <xs:attribute name="name" type="string"/>
+    </xs:complexType>
+
+    <xs:complexType name="Layer">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Category" type="Category"/>
+            <xs:element name="BlockKey" type="BlockKey"/>
+        </xs:choice>
+        <xs:attribute name="name" type="string"/>
+        <xs:attribute name="allowFallthrough" type="bool"/>
+    </xs:complexType>
+
+    <!-- root element -->
+    <xs:complexType name="BindingsType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Layer" type="Layer"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:element name="Bindings" type="BindingsType"/>
+</xs:schema>

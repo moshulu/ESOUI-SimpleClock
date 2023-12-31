@@ -1,0 +1,3294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- simple types -->
+    <xs:simpleType name="bool">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="integer">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="LuaVariable"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="layout_measurement">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:decimal"/>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string"/>
+          </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="number">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="LuaVariable"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:decimal"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="string">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="LuaVariable">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?[a-zA-Z_][0-9a-zA-Z_]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MapArrowType">
+        <!-- this type is no longer in use and not declared, but still used in the docs -->
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <!-- basic attribute types -->
+    <xs:simpleType name="AllowMarkupType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ALLOW_MARKUP_TYPE_ALL"/>
+                    <xs:enumeration value="ALLOW_MARKUP_TYPE_COLOR_ONLY"/>
+                    <xs:enumeration value="ALLOW_MARKUP_TYPE_NONE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="AnchorConstrains">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="X"/>
+                    <xs:enumeration value="XY"/>
+                    <xs:enumeration value="Y"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="AnchorPosition">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="BOTTOM"/>
+                    <xs:enumeration value="BOTTOMLEFT"/>
+                    <xs:enumeration value="BOTTOMRIGHT"/>
+                    <xs:enumeration value="CENTER"/>
+                    <xs:enumeration value="LEFT"/>
+                    <xs:enumeration value="NONE"/>
+                    <xs:enumeration value="RIGHT"/>
+                    <xs:enumeration value="TOP"/>
+                    <xs:enumeration value="TOPLEFT"/>
+                    <xs:enumeration value="TOPRIGHT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="AnimationPlayback">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="INVALID"/>
+                    <xs:enumeration value="LOOP"/>
+                    <xs:enumeration value="ONE_SHOT"/>
+                    <xs:enumeration value="PING_PONG"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="AxisRotationOrder">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="AXIS_ROTATION_ORDER_XYZ"/>
+                    <xs:enumeration value="AXIS_ROTATION_ORDER_ZXY"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="BarAlignment">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CENTER"/>
+                    <xs:enumeration value="NORMAL"/>
+                    <xs:enumeration value="REVERSE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ButtonStateType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="DISABLED"/>
+                    <xs:enumeration value="DISABLED_PRESSED"/>
+                    <xs:enumeration value="NORMAL"/>
+                    <xs:enumeration value="PRESSED"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ChildLayoutType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CHILD_LAYOUT_TYPE_FLEX"/>
+                    <xs:enumeration value="CHILD_LAYOUT_TYPE_NONE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ControlAccessControl">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PRIVATE"/>
+                    <xs:enumeration value="PUBLIC"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ControlHandlerOrder">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CONTROL_HANDLER_ORDER_AFTER"/>
+                    <xs:enumeration value="CONTROL_HANDLER_ORDER_BEFORE"/>
+                    <xs:enumeration value="CONTROL_HANDLER_ORDER_NONE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ControlMaskMode">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CONTROL_MASK_MODE_BASIC"/>
+                    <xs:enumeration value="CONTROL_MASK_MODE_NONE"/>
+                    <xs:enumeration value="CONTROL_MASK_MODE_THRESHOLD"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ControlOrientation">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="HORIZONTAL"/>
+                    <xs:enumeration value="VERTICAL"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="DrawLayer">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="BACKGROUND"/>
+                    <xs:enumeration value="CONTROLS"/>
+                    <xs:enumeration value="OVERLAY"/>
+                    <xs:enumeration value="TEXT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="DrawTier">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="DT_HIGH"/>
+                    <xs:enumeration value="DT_LOW"/>
+                    <xs:enumeration value="DT_MEDIUM"/>
+                    <xs:enumeration value="DT_PARENT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="FlexAlignment">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FLEX_ALIGNMENT_AUTO"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_BASELINE"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_CENTER"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_FLEX_END"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_FLEX_START"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_SPACE_AROUND"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_SPACE_BETWEEN"/>
+                    <xs:enumeration value="FLEX_ALIGNMENT_STRETCH"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="FlexDirection">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FLEX_DIRECTION_COLUMN"/>
+                    <xs:enumeration value="FLEX_DIRECTION_COLUMN_REVERSE"/>
+                    <xs:enumeration value="FLEX_DIRECTION_ROW"/>
+                    <xs:enumeration value="FLEX_DIRECTION_ROW_REVERSE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="FlexJustification">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FLEX_JUSTIFICATION_CENTER"/>
+                    <xs:enumeration value="FLEX_JUSTIFICATION_FLEX_END"/>
+                    <xs:enumeration value="FLEX_JUSTIFICATION_FLEX_START"/>
+                    <xs:enumeration value="FLEX_JUSTIFICATION_SPACE_AROUND"/>
+                    <xs:enumeration value="FLEX_JUSTIFICATION_SPACE_BETWEEN"/>
+                    <xs:enumeration value="FLEX_JUSTIFICATION_SPACE_EVENLY"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="FlexWrap">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FLEX_WRAP_NO_WRAP"/>
+                    <xs:enumeration value="FLEX_WRAP_WRAP"/>
+                    <xs:enumeration value="FLEX_WRAP_WRAP_REVERSE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="MapDisplayPinType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACTIVE_COMPANION"/>
+                    <xs:enumeration value="AGGRO"/>
+                    <xs:enumeration value="ALDMERI_VS_DAGGERFALL_LARGE"/>
+                    <xs:enumeration value="ALDMERI_VS_DAGGERFALL_MEDIUM"/>
+                    <xs:enumeration value="ALDMERI_VS_DAGGERFALL_SMALL"/>
+                    <xs:enumeration value="ALDMERI_VS_EBONHEART_LARGE"/>
+                    <xs:enumeration value="ALDMERI_VS_EBONHEART_MEDIUM"/>
+                    <xs:enumeration value="ALDMERI_VS_EBONHEART_SMALL"/>
+                    <xs:enumeration value="ANTIQUITY_DIG_SITE"/>
+                    <xs:enumeration value="ANTIQUITY_DIG_SITE_PING"/>
+                    <xs:enumeration value="ARTIFACT_ALDMERI_DEFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_ALDMERI_OFFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_DAGGERFALL_DEFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_DAGGERFALL_OFFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_EBONHEART_DEFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_EBONHEART_OFFENSIVE"/>
+                    <xs:enumeration value="ARTIFACT_GATE_CLOSED_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="ARTIFACT_GATE_CLOSED_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="ARTIFACT_GATE_CLOSED_EBONHEART_PACT"/>
+                    <xs:enumeration value="ARTIFACT_GATE_OPEN_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="ARTIFACT_GATE_OPEN_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="ARTIFACT_GATE_OPEN_EBONHEART_PACT"/>
+                    <xs:enumeration value="ARTIFACT_KEEP_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="ARTIFACT_KEEP_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="ARTIFACT_KEEP_EBONHEART_PACT"/>
+                    <xs:enumeration value="ARTIFACT_RETURN_ALDMERI"/>
+                    <xs:enumeration value="ARTIFACT_RETURN_DAGGERFALL"/>
+                    <xs:enumeration value="ARTIFACT_RETURN_EBONHEART"/>
+                    <xs:enumeration value="ASSISTED_QUEST_CONDITION"/>
+                    <xs:enumeration value="ASSISTED_QUEST_ENDING"/>
+                    <xs:enumeration value="ASSISTED_QUEST_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="ASSISTED_QUEST_REPEATABLE_CONDITION"/>
+                    <xs:enumeration value="ASSISTED_QUEST_REPEATABLE_ENDING"/>
+                    <xs:enumeration value="ASSISTED_QUEST_REPEATABLE_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="ASSISTED_QUEST_ZONE_STORY_CONDITION"/>
+                    <xs:enumeration value="ASSISTED_QUEST_ZONE_STORY_ENDING"/>
+                    <xs:enumeration value="ASSISTED_QUEST_ZONE_STORY_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="AUTO_MAP_NAVIGATION_PING"/>
+                    <xs:enumeration value="AVA_CAPTURE_AREA_ALDMERI"/>
+                    <xs:enumeration value="AVA_CAPTURE_AREA_AURA"/>
+                    <xs:enumeration value="AVA_CAPTURE_AREA_DAGGERFALL"/>
+                    <xs:enumeration value="AVA_CAPTURE_AREA_EBONHEART"/>
+                    <xs:enumeration value="AVA_CAPTURE_AREA_NEUTRAL"/>
+                    <xs:enumeration value="AVA_DAEDRIC_ARTIFACT_VOLENDRUNG_ALDMERI"/>
+                    <xs:enumeration value="AVA_DAEDRIC_ARTIFACT_VOLENDRUNG_DAGGERFALL"/>
+                    <xs:enumeration value="AVA_DAEDRIC_ARTIFACT_VOLENDRUNG_EBONHEART"/>
+                    <xs:enumeration value="AVA_DAEDRIC_ARTIFACT_VOLENDRUNG_NEUTRAL"/>
+                    <xs:enumeration value="AVA_TOWN_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="AVA_TOWN_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="AVA_TOWN_EBONHEART_PACT"/>
+                    <xs:enumeration value="AVA_TOWN_GRAVEYARD_ACCESSIBLE"/>
+                    <xs:enumeration value="AVA_TOWN_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_AURA"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_A_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_A_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_A_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_A_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_B_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_B_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_B_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_B_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_C_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_C_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_C_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_C_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_D_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_D_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_D_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_D_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_CAPTURE_AREA_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_FLAG_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_FLAG_FIRE_DRAKES_AURA"/>
+                    <xs:enumeration value="BGPIN_FLAG_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_FLAG_NEUTRAL_AURA"/>
+                    <xs:enumeration value="BGPIN_FLAG_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_FLAG_PIT_DAEMONS_AURA"/>
+                    <xs:enumeration value="BGPIN_FLAG_RETURN_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_FLAG_RETURN_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_FLAG_RETURN_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_FLAG_SPAWN_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_FLAG_SPAWN_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_FLAG_SPAWN_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_FLAG_SPAWN_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_FLAG_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_FLAG_STORM_LORDS_AURA"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_AURA"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_A_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_A_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_A_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_A_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_B_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_B_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_B_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_B_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_C_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_C_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_C_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_C_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_D_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_D_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_D_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_D_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MOBILE_CAPTURE_AREA_STORM_LORDS"/>
+                    <xs:enumeration value="BGPIN_MURDERBALL_FIRE_DRAKES"/>
+                    <xs:enumeration value="BGPIN_MURDERBALL_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MURDERBALL_PIT_DAEMONS"/>
+                    <xs:enumeration value="BGPIN_MURDERBALL_SPAWN_NEUTRAL"/>
+                    <xs:enumeration value="BGPIN_MURDERBALL_STORM_LORDS"/>
+                    <xs:enumeration value="BORDER_KEEP_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="BORDER_KEEP_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="BORDER_KEEP_EBONHEART_PACT"/>
+                    <xs:enumeration value="DARK_BROTHERHOOD_TARGET"/>
+                    <xs:enumeration value="EBONHEART_VS_DAGGERFALL_LARGE"/>
+                    <xs:enumeration value="EBONHEART_VS_DAGGERFALL_MEDIUM"/>
+                    <xs:enumeration value="EBONHEART_VS_DAGGERFALL_SMALL"/>
+                    <xs:enumeration value="FARM_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="FARM_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="FARM_EBONHEART_PACT"/>
+                    <xs:enumeration value="FARM_NEUTRAL"/>
+                    <xs:enumeration value="FAST_TRAVEL_BORDER_KEEP_ACCESSIBLE"/>
+                    <xs:enumeration value="FAST_TRAVEL_KEEP_ACCESSIBLE"/>
+                    <xs:enumeration value="FAST_TRAVEL_OUTPOST_ACCESSIBLE"/>
+                    <xs:enumeration value="FAST_TRAVEL_WAYSHRINE"/>
+                    <xs:enumeration value="FAST_TRAVEL_WAYSHRINE_CURRENT_LOC"/>
+                    <xs:enumeration value="FORWARD_CAMP_ACCESSIBLE"/>
+                    <xs:enumeration value="FORWARD_CAMP_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="FORWARD_CAMP_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="FORWARD_CAMP_EBONHEART_PACT"/>
+                    <xs:enumeration value="GROUP"/>
+                    <xs:enumeration value="GROUP_LEADER"/>
+                    <xs:enumeration value="HARVEST_NODE"/>
+                    <xs:enumeration value="IMPERIAL_DISTRICT_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="IMPERIAL_DISTRICT_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="IMPERIAL_DISTRICT_EBONHEART_PACT"/>
+                    <xs:enumeration value="IMPERIAL_DISTRICT_GRAVEYARD_ACCESSIBLE"/>
+                    <xs:enumeration value="IMPERIAL_DISTRICT_NEUTRAL"/>
+                    <xs:enumeration value="INVALID"/>
+                    <xs:enumeration value="KEEP_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="KEEP_ATTACKED_LARGE"/>
+                    <xs:enumeration value="KEEP_ATTACKED_SMALL"/>
+                    <xs:enumeration value="KEEP_BRIDGE"/>
+                    <xs:enumeration value="KEEP_BRIDGE_IMPASSABLE"/>
+                    <xs:enumeration value="KEEP_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="KEEP_EBONHEART_PACT"/>
+                    <xs:enumeration value="KEEP_GRAVEYARD_ACCESSIBLE"/>
+                    <xs:enumeration value="KEEP_MILEGATE"/>
+                    <xs:enumeration value="KEEP_MILEGATE_CENTER_DESTROYED"/>
+                    <xs:enumeration value="KEEP_MILEGATE_IMPASSABLE"/>
+                    <xs:enumeration value="KEEP_NEUTRAL"/>
+                    <xs:enumeration value="LOCATION"/>
+                    <xs:enumeration value="MILL_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="MILL_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="MILL_EBONHEART_PACT"/>
+                    <xs:enumeration value="MILL_NEUTRAL"/>
+                    <xs:enumeration value="MINE_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="MINE_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="MINE_EBONHEART_PACT"/>
+                    <xs:enumeration value="MINE_NEUTRAL"/>
+                    <xs:enumeration value="NPC_FOLLOWER"/>
+                    <xs:enumeration value="OUTPOST_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="OUTPOST_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="OUTPOST_EBONHEART_PACT"/>
+                    <xs:enumeration value="OUTPOST_GRAVEYARD_ACCESSIBLE"/>
+                    <xs:enumeration value="OUTPOST_NEUTRAL"/>
+                    <xs:enumeration value="PING"/>
+                    <xs:enumeration value="PLAYER"/>
+                    <xs:enumeration value="PLAYER_CAMERA"/>
+                    <xs:enumeration value="PLAYER_WAYPOINT"/>
+                    <xs:enumeration value="POI_COMPLETE"/>
+                    <xs:enumeration value="POI_SEEN"/>
+                    <xs:enumeration value="POI_SUGGESTED"/>
+                    <xs:enumeration value="QUEST_COMPLETE"/>
+                    <xs:enumeration value="QUEST_CONDITION"/>
+                    <xs:enumeration value="QUEST_ENDING"/>
+                    <xs:enumeration value="QUEST_GIVE_ITEM"/>
+                    <xs:enumeration value="QUEST_INTERACT"/>
+                    <xs:enumeration value="QUEST_OFFER"/>
+                    <xs:enumeration value="QUEST_OFFER_REPEATABLE"/>
+                    <xs:enumeration value="QUEST_OFFER_ZONE_STORY"/>
+                    <xs:enumeration value="QUEST_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="QUEST_PING"/>
+                    <xs:enumeration value="QUEST_REPEATABLE_CONDITION"/>
+                    <xs:enumeration value="QUEST_REPEATABLE_ENDING"/>
+                    <xs:enumeration value="QUEST_REPEATABLE_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="QUEST_TALK_TO"/>
+                    <xs:enumeration value="QUEST_ZONE_STORY_CONDITION"/>
+                    <xs:enumeration value="QUEST_ZONE_STORY_ENDING"/>
+                    <xs:enumeration value="QUEST_ZONE_STORY_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="RALLY_POINT"/>
+                    <xs:enumeration value="RESPAWN_BORDER_KEEP_ACCESSIBLE"/>
+                    <xs:enumeration value="RESTRICTED_LINK_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="RESTRICTED_LINK_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="RESTRICTED_LINK_EBONHEART_PACT"/>
+                    <xs:enumeration value="RETURN_ALDMERI_DOMINION"/>
+                    <xs:enumeration value="RETURN_DAGGERFALL_COVENANT"/>
+                    <xs:enumeration value="RETURN_EBONHEART_PACT"/>
+                    <xs:enumeration value="RETURN_NEUTRAL"/>
+                    <xs:enumeration value="SKYSHARD_COMPLETE"/>
+                    <xs:enumeration value="SKYSHARD_SEEN"/>
+                    <xs:enumeration value="SKYSHARD_SUGGESTED"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_EIGHT"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_FIVE"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_FOUR"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_ONE"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_SEVEN"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_SIX"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_THREE"/>
+                    <xs:enumeration value="TARGET_MARKER_TYPE_TWO"/>
+                    <xs:enumeration value="TIMELY_ESCAPE_NPC"/>
+                    <xs:enumeration value="TRACKED_ANTIQUITY_DIG_SITE"/>
+                    <xs:enumeration value="TRACKED_QUEST_CONDITION"/>
+                    <xs:enumeration value="TRACKED_QUEST_ENDING"/>
+                    <xs:enumeration value="TRACKED_QUEST_OFFER_ZONE_STORY"/>
+                    <xs:enumeration value="TRACKED_QUEST_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="TRACKED_QUEST_REPEATABLE_CONDITION"/>
+                    <xs:enumeration value="TRACKED_QUEST_REPEATABLE_ENDING"/>
+                    <xs:enumeration value="TRACKED_QUEST_REPEATABLE_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="TRACKED_QUEST_ZONE_STORY_CONDITION"/>
+                    <xs:enumeration value="TRACKED_QUEST_ZONE_STORY_ENDING"/>
+                    <xs:enumeration value="TRACKED_QUEST_ZONE_STORY_OPTIONAL_CONDITION"/>
+                    <xs:enumeration value="TRAINER"/>
+                    <xs:enumeration value="TRI_BATTLE_LARGE"/>
+                    <xs:enumeration value="TRI_BATTLE_MEDIUM"/>
+                    <xs:enumeration value="TRI_BATTLE_SMALL"/>
+                    <xs:enumeration value="UNIT_COMBAT_HEALTHY"/>
+                    <xs:enumeration value="UNIT_COMBAT_WEAK"/>
+                    <xs:enumeration value="UNIT_IDLE_HEALTHY"/>
+                    <xs:enumeration value="UNIT_IDLE_WEAK"/>
+                    <xs:enumeration value="VENDOR"/>
+                    <xs:enumeration value="WORLD_EVENT_POI_ACTIVE"/>
+                    <xs:enumeration value="ZONE_STORY_SUGGESTED_AREA"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="MapPinAnimationTarget">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="MAP_AND_GUTTER"/>
+                    <xs:enumeration value="MAP_ONLY"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ModifyTextType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="NONE"/>
+                    <xs:enumeration value="UPPERCASE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="MouseButtonIndex">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_BUTTON_4"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_BUTTON_5"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_INVALID"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_LEFT"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_LEFT_AND_RIGHT"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_MIDDLE"/>
+                    <xs:enumeration value="MOUSE_BUTTON_INDEX_RIGHT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="PolygonBorderDirection">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="POLYGON_BORDER_DIRECTION_IN"/>
+                    <xs:enumeration value="POLYGON_BORDER_DIRECTION_OUT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="PolygonPointLayout">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="POLYGON_POINT_LAYOUT_CLOCKWISE"/>
+                    <xs:enumeration value="POLYGON_POINT_LAYOUT_COUNTER_CLOCKWISE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ReleaseReferenceOptions">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="KEEP_TEXTURE_AT_ZERO_REFERENCES"/>
+                    <xs:enumeration value="RELEASE_TEXTURE_AT_ZERO_REFERENCES"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="RotationAnimationMode">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ROTATION_ANIMATION_MODE_EULER"/>
+                    <xs:enumeration value="ROTATION_ANIMATION_MODE_QUATERNION"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ShaderEffectType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_CAUSTIC"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_GAUSSIAN_BLUR"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_HALO"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_MOTION_BLUR"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_NONE"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_RADIAL_BLUR"/>
+                    <xs:enumeration value="SHADER_EFFECT_TYPE_WAVE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="ShapeType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="BOX"/>
+                    <xs:enumeration value="CIRCLE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="Space">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SPACE_CAMERA"/>
+                    <xs:enumeration value="SPACE_INTERFACE"/>
+                    <xs:enumeration value="SPACE_WORLD"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextAlignment">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="BOTTOM"/>
+                    <xs:enumeration value="CENTER"/>
+                    <xs:enumeration value="LEFT"/>
+                    <xs:enumeration value="RIGHT"/>
+                    <xs:enumeration value="TOP"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextType">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="TEXT_TYPE_ALL"/>
+                    <xs:enumeration value="TEXT_TYPE_ALPHABETIC"/>
+                    <xs:enumeration value="TEXT_TYPE_ALPHABETIC_NO_FULLWIDTH_LATIN"/>
+                    <xs:enumeration value="TEXT_TYPE_NUMERIC"/>
+                    <xs:enumeration value="TEXT_TYPE_NUMERIC_UNSIGNED_INT"/>
+                    <xs:enumeration value="TEXT_TYPE_PASSWORD"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextWrapMode">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ELLIPSIS"/>
+                    <xs:enumeration value="TRUNCATE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextureAddressMode">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CLAMP"/>
+                    <xs:enumeration value="WRAP"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextureBlendMode">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ADD"/>
+                    <xs:enumeration value="ALPHA"/>
+                    <xs:enumeration value="COLOR_DODGE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="TextureSampleProcessing">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="integer"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ALPHA_AS_RGB"/>
+                    <xs:enumeration value="RGB"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <!-- basic element types -->
+    <xs:complexType name="Anchor">
+        <xs:attribute name="point"
+                      type="AnchorPosition"/>
+        <xs:attribute name="relativePoint"
+                      type="AnchorPosition"/>
+        <xs:attribute name="relativeTo"
+                      type="string"/>
+        <xs:attribute name="offsetX"
+                      type="layout_measurement"/>
+        <xs:attribute name="offsetY"
+                      type="layout_measurement"/>
+        <xs:attribute name="constrains"
+                      type="AnchorConstrains"/>
+    </xs:complexType>
+    <xs:complexType name="AnchorFill"/>
+    <xs:complexType name="AnchorToBaseline">
+        <xs:attribute name="relativeToLabel"
+                      type="string"/>
+        <xs:attribute name="offsetX"
+                      type="layout_measurement"/>
+        <xs:attribute name="side"
+                      type="AnchorPosition"/>
+    </xs:complexType>
+    <xs:complexType name="BackgroundBottom">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="BackgroundMiddle">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="BackgroundTop">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="BackupFont">
+        <xs:attribute name="originalFont"
+                      type="string"/>
+        <xs:attribute name="backupFont"
+                      type="string"/>
+        <xs:attribute name="backupFontSizeModifier"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="Border">
+        <xs:attribute name="minThickness"
+                      type="layout_measurement"/>
+        <xs:attribute name="maxThickness"
+                      type="layout_measurement"/>
+        <xs:attribute name="thicknessPercent"
+                      type="number"/>
+        <xs:attribute name="color"
+                      type="string"/>
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="desaturation"
+                      type="number"/>
+        <xs:attribute name="blendMode"
+                      type="TextureBlendMode"/>
+        <xs:attribute name="direction"
+                      type="PolygonBorderDirection"/>
+    </xs:complexType>
+    <xs:complexType name="ButtonState">
+        <xs:attribute name="state"
+                      type="ButtonStateType"/>
+        <xs:attribute name="locked"
+                      type="bool"/>
+    </xs:complexType>
+    <xs:complexType name="Caustic">
+        <xs:attribute name="frequencyX"
+                      type="number"/>
+        <xs:attribute name="frequencyY"
+                      type="number"/>
+        <xs:attribute name="speed"
+                      type="number"/>
+        <xs:attribute name="offset"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="Center">
+        <xs:attribute name="file"
+                      type="string"/>
+        <xs:attribute name="tileSize"
+                      type="layout_measurement"/>
+        <xs:attribute name="tiled"
+                      type="bool"/>
+    </xs:complexType>
+    <xs:complexType name="CenterTextureCoords">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="CircularClip">
+        <xs:attribute name="centerX"
+                      type="number"/>
+        <xs:attribute name="centerY"
+                      type="number"/>
+        <xs:attribute name="radius"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="ClampedToScreenInsets">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="ClearAnchors"/>
+    <xs:complexType name="ClearClips"/>
+    <xs:complexType name="CompassPinType">
+        <xs:attribute name="name"
+                      type="MapDisplayPinType"/>
+        <xs:attribute name="pinSize"
+                      type="number"/>
+        <xs:attribute name="pinTexture"
+                      type="string"/>
+        <xs:attribute name="areaTexture"
+                      type="string"/>
+        <xs:attribute name="aboveTexture"
+                      type="string"/>
+        <xs:attribute name="belowTexture"
+                      type="string"/>
+        <xs:attribute name="linkTexture"
+                      type="string"/>
+        <xs:attribute name="clamped"
+                      type="bool"/>
+        <xs:attribute name="allowUpdatesWhenAnimating"
+                      type="bool"/>
+        <xs:attribute name="maxDistanceM"
+                      type="number"/>
+        <xs:attribute name="closeScale"
+                      type="number"/>
+        <xs:attribute name="farScale"
+                      type="number"/>
+        <xs:attribute name="closeScaleDistanceM"
+                      type="number"/>
+        <xs:attribute name="farScaleDistanceM"
+                      type="number"/>
+        <xs:attribute name="closeAlpha"
+                      type="number"/>
+        <xs:attribute name="farAlpha"
+                      type="number"/>
+        <xs:attribute name="closeAlphaDistanceM"
+                      type="number"/>
+        <xs:attribute name="farAlphaDistanceM"
+                      type="number"/>
+        <xs:attribute name="animation"
+                      type="string"/>
+        <xs:attribute name="addedAnimation"
+                      type="string"/>
+        <xs:attribute name="removedAnimation"
+                      type="string"/>
+        <xs:attribute name="layer"
+                      type="DrawLayer"/>
+        <xs:attribute name="drawLevelOffsetBase"
+                      type="integer"/>
+    </xs:complexType>
+    <xs:complexType name="DimensionConstraints">
+        <xs:attribute name="minX"
+                      type="layout_measurement"/>
+        <xs:attribute name="minY"
+                      type="layout_measurement"/>
+        <xs:attribute name="maxX"
+                      type="layout_measurement"/>
+        <xs:attribute name="maxY"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="Dimensions">
+        <xs:attribute name="x"
+                      type="layout_measurement"/>
+        <xs:attribute name="y"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="Edge">
+        <xs:attribute name="file"
+                      type="string"/>
+        <xs:attribute name="edgeFileWidth"
+                      type="integer"/>
+        <xs:attribute name="edgeFileHeight"
+                      type="integer"/>
+        <xs:attribute name="edgeSize"
+                      type="layout_measurement"/>
+        <xs:attribute name="edgeFilePadding"
+                      type="integer"/>
+    </xs:complexType>
+    <xs:complexType name="FadeGradient">
+        <xs:attribute name="x1"
+                      type="number"/>
+        <xs:attribute name="y1"
+                      type="number"/>
+        <xs:attribute name="size1"
+                      type="number"/>
+        <xs:attribute name="x2"
+                      type="number"/>
+        <xs:attribute name="y2"
+                      type="number"/>
+        <xs:attribute name="size2"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="FlexMargin">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="FlexPadding">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="FontColors">
+        <xs:attribute name="disabledColor"
+                      type="string"/>
+        <xs:attribute name="disabledPressedColor"
+                      type="string"/>
+        <xs:attribute name="mouseOverColor"
+                      type="string"/>
+        <xs:attribute name="normalColor"
+                      type="string"/>
+        <xs:attribute name="pressedColor"
+                      type="string"/>
+    </xs:complexType>
+    <xs:complexType name="GaussianBlur">
+        <xs:attribute name="kernelSize"
+                      type="integer"/>
+        <xs:attribute name="factor"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="HitInsets">
+        <xs:attribute name="left"
+                      type="layout_measurement"/>
+        <xs:attribute name="top"
+                      type="layout_measurement"/>
+        <xs:attribute name="right"
+                      type="layout_measurement"/>
+        <xs:attribute name="bottom"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="Insets">
+        <xs:attribute name="left"
+                      type="layout_measurement"/>
+        <xs:attribute name="top"
+                      type="layout_measurement"/>
+        <xs:attribute name="right"
+                      type="layout_measurement"/>
+        <xs:attribute name="bottom"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="LeadingEdge">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="width"
+                      type="number"/>
+        <xs:attribute name="height"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="LeadingEdgeTextureCoords">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="Limits">
+        <xs:attribute name="min"
+                      type="number"/>
+        <xs:attribute name="max"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="LineFade">
+        <xs:attribute name="fadeBegin"
+                      type="number"/>
+        <xs:attribute name="fadeDuration"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="LocalDimensions3D">
+        <xs:attribute name="x"
+                      type="number"/>
+        <xs:attribute name="y"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="MapGutter">
+        <xs:attribute name="offset"
+                      type="number"/>
+        <xs:attribute name="size"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="MapPinType">
+        <xs:attribute name="name"
+                      type="MapDisplayPinType"/>
+        <xs:attribute name="arrowType"
+                      type="MapArrowType"/>
+        <xs:attribute name="pinSize"
+                      type="number"/>
+        <xs:attribute name="pinXInset"
+                      type="number"/>
+        <xs:attribute name="pinYInset"
+                      type="number"/>
+        <xs:attribute name="arrowSize"
+                      type="number"/>
+        <xs:attribute name="pinTexture"
+                      type="string"/>
+        <xs:attribute name="arrowTexture"
+                      type="string"/>
+        <xs:attribute name="areaTexture"
+                      type="string"/>
+        <xs:attribute name="aboveTexture"
+                      type="string"/>
+        <xs:attribute name="belowTexture"
+                      type="string"/>
+        <xs:attribute name="linkTexture"
+                      type="string"/>
+        <xs:attribute name="animation"
+                      type="string"/>
+        <xs:attribute name="addedAnimation"
+                      type="string"/>
+        <xs:attribute name="removedAnimation"
+                      type="string"/>
+        <xs:attribute name="animationTarget"
+                      type="MapPinAnimationTarget"/>
+    </xs:complexType>
+    <xs:complexType name="MotionBlur">
+        <xs:attribute name="blurVectorXAsAPercentageOfControlWidth"
+                      type="number"/>
+        <xs:attribute name="blurVectorYAsAPercentageOfControlHeight"
+                      type="number"/>
+        <xs:attribute name="numSamples"
+                      type="integer"/>
+    </xs:complexType>
+    <xs:complexType name="MouseButton">
+        <xs:attribute name="button"
+                      type="MouseButtonIndex"/>
+        <xs:attribute name="enabled"
+                      type="bool"/>
+    </xs:complexType>
+    <xs:complexType name="NormalOffset">
+        <xs:attribute name="x"
+                      type="layout_measurement"/>
+        <xs:attribute name="y"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="PressedOffset">
+        <xs:attribute name="x"
+                      type="layout_measurement"/>
+        <xs:attribute name="y"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="RadialBlur">
+        <xs:attribute name="originX"
+                      type="number"/>
+        <xs:attribute name="originY"
+                      type="number"/>
+        <xs:attribute name="numSamples"
+                      type="integer"/>
+        <xs:attribute name="blurRadius"
+                      type="number"/>
+        <xs:attribute name="offsetRadius"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="RadialCooldownGradient">
+        <xs:attribute name="startAlpha"
+                      type="number"/>
+        <xs:attribute name="angularDistance"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="RectangularClip">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="ResizeToFitPadding">
+        <xs:attribute name="width"
+                      type="layout_measurement"/>
+        <xs:attribute name="height"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="ScrollingOverlay">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="width"
+                      type="number"/>
+        <xs:attribute name="height"
+                      type="number"/>
+        <xs:attribute name="duration"
+                      type="integer"/>
+    </xs:complexType>
+    <xs:complexType name="Surface">
+        <xs:attribute name="texCoordLeft"
+                      type="number"/>
+        <xs:attribute name="texCoordRight"
+                      type="number"/>
+        <xs:attribute name="texCoordTop"
+                      type="number"/>
+        <xs:attribute name="texCoordBottom"
+                      type="number"/>
+        <xs:attribute name="insetLeft"
+                      type="number"/>
+        <xs:attribute name="insetRight"
+                      type="number"/>
+        <xs:attribute name="insetTop"
+                      type="number"/>
+        <xs:attribute name="insetBottom"
+                      type="number"/>
+        <xs:attribute name="color"
+                      type="string"/>
+        <xs:attribute name="hidden"
+                      type="bool"/>
+        <xs:attribute name="scale"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="TextureCoords">
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="TextureSampleProcessingWeight">
+        <xs:attribute name="type"
+                      type="TextureSampleProcessing"/>
+        <xs:attribute name="weight"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="Textures">
+        <xs:attribute name="disabled"
+                      type="string"/>
+        <xs:attribute name="disabledPressed"
+                      type="string"/>
+        <xs:attribute name="mouseOver"
+                      type="string"/>
+        <xs:attribute name="normal"
+                      type="string"/>
+        <xs:attribute name="pressed"
+                      type="string"/>
+        <xs:attribute name="pressedMouseOver"
+                      type="string"/>
+    </xs:complexType>
+    <xs:complexType name="ThumbTexture">
+        <xs:attribute name="textureFile"
+                      type="string"/>
+        <xs:attribute name="disabledTextureFile"
+                      type="string"/>
+        <xs:attribute name="highlightedTextureFile"
+                      type="string"/>
+        <xs:attribute name="thumbWidth"
+                      type="layout_measurement"/>
+        <xs:attribute name="thumbHeight"
+                      type="layout_measurement"/>
+        <xs:attribute name="left"
+                      type="number"/>
+        <xs:attribute name="top"
+                      type="number"/>
+        <xs:attribute name="bottom"
+                      type="number"/>
+        <xs:attribute name="right"
+                      type="number"/>
+        <xs:attribute name="flushWithSliderExtents"
+                      type="bool"/>
+    </xs:complexType>
+    <xs:complexType name="TransformOffset">
+        <xs:attribute name="x"
+                      type="layout_measurement"/>
+        <xs:attribute name="y"
+                      type="layout_measurement"/>
+        <xs:attribute name="z"
+                      type="layout_measurement"/>
+    </xs:complexType>
+    <xs:complexType name="TransformOrigin">
+        <xs:attribute name="x"
+                      type="number"/>
+        <xs:attribute name="y"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="TransformRotation">
+        <xs:attribute name="x"
+                      type="number"/>
+        <xs:attribute name="y"
+                      type="number"/>
+        <xs:attribute name="z"
+                      type="number"/>
+        <xs:attribute name="axisOrder"
+                      type="AxisRotationOrder"/>
+    </xs:complexType>
+    <xs:complexType name="TransformScale">
+        <xs:attribute name="x"
+                      type="number"/>
+        <xs:attribute name="y"
+                      type="number"/>
+        <xs:attribute name="z"
+                      type="number"/>
+        <xs:attribute name="scale"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="TransformSkew">
+        <xs:attribute name="x"
+                      type="number"/>
+        <xs:attribute name="y"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="Wave">
+        <xs:attribute name="angleRadians"
+                      type="number"/>
+        <xs:attribute name="frequency"
+                      type="number"/>
+        <xs:attribute name="speed"
+                      type="number"/>
+        <xs:attribute name="offset"
+                      type="number"/>
+    </xs:complexType>
+    <xs:complexType name="WaveBounds">
+        <xs:attribute name="minX"
+                      type="number"/>
+        <xs:attribute name="maxX"
+                      type="number"/>
+        <xs:attribute name="minY"
+                      type="number"/>
+        <xs:attribute name="maxY"
+                      type="number"/>
+    </xs:complexType>
+    <!-- element types -->
+    <!-- AnimationBase element types -->
+    <xs:complexType name="AlphaAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endAlpha"
+                              type="number"/>
+                <xs:attribute name="startAlpha"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ColorAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="applyAlpha"
+                              type="bool"/>
+                <xs:attribute name="endColor"
+                              type="string"/>
+                <xs:attribute name="startColor"
+                              type="string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CustomAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                    <xs:element name="UpdateFunction"
+                                type="UpdateFunction"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DesaturationAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endDesaturation"
+                              type="number"/>
+                <xs:attribute name="startDesaturation"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Rotate3DAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endPitch"
+                              type="number"/>
+                <xs:attribute name="endRoll"
+                              type="number"/>
+                <xs:attribute name="endYaw"
+                              type="number"/>
+                <xs:attribute name="startPitch"
+                              type="number"/>
+                <xs:attribute name="startRoll"
+                              type="number"/>
+                <xs:attribute name="startYaw"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ScaleAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endScale"
+                              type="number"/>
+                <xs:attribute name="startScale"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SizeAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endHeight"
+                              type="number"/>
+                <xs:attribute name="endWidth"
+                              type="number"/>
+                <xs:attribute name="startHeight"
+                              type="number"/>
+                <xs:attribute name="startWidth"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TextureAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="cellsHigh"
+                              type="integer"/>
+                <xs:attribute name="cellsWide"
+                              type="integer"/>
+                <xs:attribute name="framerate"
+                              type="number"/>
+                <xs:attribute name="mirrorAlongX"
+                              type="bool"/>
+                <xs:attribute name="mirrorAlongY"
+                              type="bool"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TextureRotateAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endRotation"
+                              type="number"/>
+                <xs:attribute name="startRotation"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TextureSlideAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="deltaU"
+                              type="number"/>
+                <xs:attribute name="deltaV"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TransformOffsetAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endX"
+                              type="number"/>
+                <xs:attribute name="endY"
+                              type="number"/>
+                <xs:attribute name="endZ"
+                              type="number"/>
+                <xs:attribute name="startX"
+                              type="number"/>
+                <xs:attribute name="startY"
+                              type="layout_measurement"/>
+                <xs:attribute name="startZ"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TransformRotationAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endX"
+                              type="number"/>
+                <xs:attribute name="endY"
+                              type="number"/>
+                <xs:attribute name="endZ"
+                              type="number"/>
+                <xs:attribute name="mode"
+                              type="RotationAnimationMode"/>
+                <xs:attribute name="startX"
+                              type="number"/>
+                <xs:attribute name="startY"
+                              type="layout_measurement"/>
+                <xs:attribute name="startZ"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TransformScaleAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endScale"
+                              type="number"/>
+                <xs:attribute name="endScaleX"
+                              type="number"/>
+                <xs:attribute name="endScaleY"
+                              type="number"/>
+                <xs:attribute name="startScale"
+                              type="number"/>
+                <xs:attribute name="startScaleX"
+                              type="number"/>
+                <xs:attribute name="startScaleY"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TransformSkewAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="endSkewX"
+                              type="number"/>
+                <xs:attribute name="endSkewY"
+                              type="number"/>
+                <xs:attribute name="startSkewX"
+                              type="number"/>
+                <xs:attribute name="startSkewY"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Translate3DAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="deltaX"
+                              type="layout_measurement"/>
+                <xs:attribute name="deltaXFromEnd"
+                              type="number"/>
+                <xs:attribute name="deltaY"
+                              type="layout_measurement"/>
+                <xs:attribute name="deltaYFromEnd"
+                              type="layout_measurement"/>
+                <xs:attribute name="deltaZ"
+                              type="number"/>
+                <xs:attribute name="deltaZFromEnd"
+                              type="number"/>
+                <xs:attribute name="endX"
+                              type="number"/>
+                <xs:attribute name="endY"
+                              type="number"/>
+                <xs:attribute name="endZ"
+                              type="number"/>
+                <xs:attribute name="startX"
+                              type="number"/>
+                <xs:attribute name="startY"
+                              type="layout_measurement"/>
+                <xs:attribute name="startZ"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TranslateAnimation">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="anchorIndex"
+                              type="integer"/>
+                <xs:attribute name="deltaX"
+                              type="layout_measurement"/>
+                <xs:attribute name="deltaXFromEnd"
+                              type="number"/>
+                <xs:attribute name="deltaY"
+                              type="layout_measurement"/>
+                <xs:attribute name="deltaYFromEnd"
+                              type="layout_measurement"/>
+                <xs:attribute name="endX"
+                              type="number"/>
+                <xs:attribute name="endY"
+                              type="number"/>
+                <xs:attribute name="startX"
+                              type="number"/>
+                <xs:attribute name="startY"
+                              type="layout_measurement"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- Control element types -->
+    <xs:complexType name="Backdrop">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="Center"
+                                type="Center"/>
+                    <xs:element name="Edge"
+                                type="Edge"/>
+                    <xs:element name="Insets"
+                                type="Insets"/>
+                </xs:choice>
+                <xs:attribute name="blendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="centerColor"
+                              type="string"/>
+                <xs:attribute name="edgeColor"
+                              type="string"/>
+                <xs:attribute name="integralWrapping"
+                              type="bool"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="textureFileReleaseOption"
+                              type="ReleaseReferenceOptions"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Button">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="ButtonState"
+                                type="ButtonState"/>
+                    <xs:element name="FontColors"
+                                type="FontColors"/>
+                    <xs:element name="MouseButton"
+                                type="MouseButton"/>
+                    <xs:element name="NormalOffset"
+                                type="NormalOffset"/>
+                    <xs:element name="OnClicked"
+                                type="OnClicked"/>
+                    <xs:element name="PressedOffset"
+                                type="PressedOffset"/>
+                    <xs:element name="TextureCoords"
+                                type="TextureCoords"/>
+                    <xs:element name="Textures"
+                                type="Textures"/>
+                </xs:choice>
+                <xs:attribute name="clickSound"
+                              type="string"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="enabled"
+                              type="bool"/>
+                <xs:attribute name="endCapWidth"
+                              type="layout_measurement"/>
+                <xs:attribute name="font"
+                              type="string"/>
+                <xs:attribute name="horizontalAlignment"
+                              type="TextAlignment"/>
+                <xs:attribute name="modifyTextType"
+                              type="ModifyTextType"/>
+                <xs:attribute name="mouseOverBlendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="text"
+                              type="string"/>
+                <xs:attribute name="textureFileReleaseOption"
+                              type="ReleaseReferenceOptions"/>
+                <xs:attribute name="verticalAlignment"
+                              type="TextAlignment"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ColorSelect">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="OnColorSelected"
+                                type="OnColorSelected"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Compass">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="CompassPinType"
+                                type="CompassPinType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Cooldown">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="RadialCooldownGradient"
+                                type="RadialCooldownGradient"/>
+                </xs:choice>
+                <xs:attribute name="blendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="fillColor"
+                              type="string"/>
+                <xs:attribute name="leadingEdgeTexture"
+                              type="string"/>
+                <xs:attribute name="radialCooldownClockwise"
+                              type="bool"/>
+                <xs:attribute name="radialCooldownOriginAngle"
+                              type="number"/>
+                <xs:attribute name="textureFile"
+                              type="string"/>
+                <xs:attribute name="textureFileReleaseOption"
+                              type="ReleaseReferenceOptions"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DebugText">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="font"
+                              type="string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="EditBox">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="OnBackspace"
+                                type="OnBackspace"/>
+                    <xs:element name="OnDownArrow"
+                                type="OnDownArrow"/>
+                    <xs:element name="OnEnter"
+                                type="OnEnter"/>
+                    <xs:element name="OnEscape"
+                                type="OnEscape"/>
+                    <xs:element name="OnFocusGained"
+                                type="OnFocusGained"/>
+                    <xs:element name="OnFocusLost"
+                                type="OnFocusLost"/>
+                    <xs:element name="OnIMEBeginComposition"
+                                type="OnIMEBeginComposition"/>
+                    <xs:element name="OnIMEEndComposition"
+                                type="OnIMEEndComposition"/>
+                    <xs:element name="OnPageDown"
+                                type="OnPageDown"/>
+                    <xs:element name="OnPageUp"
+                                type="OnPageUp"/>
+                    <xs:element name="OnSpace"
+                                type="OnSpace"/>
+                    <xs:element name="OnTab"
+                                type="OnTab"/>
+                    <xs:element name="OnTextChanged"
+                                type="OnTextChanged"/>
+                    <xs:element name="OnUpArrow"
+                                type="OnUpArrow"/>
+                </xs:choice>
+                <xs:attribute name="allowMarkupType"
+                              type="AllowMarkupType"/>
+                <xs:attribute name="color"
+                              type="string"/>
+                <xs:attribute name="defaultText"
+                              type="string"/>
+                <xs:attribute name="defaultTextColor"
+                              type="string"/>
+                <xs:attribute name="editEnabled"
+                              type="bool"/>
+                <xs:attribute name="font"
+                              type="string"/>
+                <xs:attribute name="isPassword"
+                              type="bool"/>
+                <xs:attribute name="maxInputCharacters"
+                              type="integer"/>
+                <xs:attribute name="multiLine"
+                              type="bool"/>
+                <xs:attribute name="newLineEnabled"
+                              type="bool"/>
+                <xs:attribute name="selectAllOnFocus"
+                              type="bool"/>
+                <xs:attribute name="selectionColor"
+                              type="string"/>
+                <xs:attribute name="text"
+                              type="string"/>
+                <xs:attribute name="textType"
+                              type="TextType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Label">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="AnchorToBaseline"
+                                type="AnchorToBaseline"/>
+                    <xs:element name="OnLinkClicked"
+                                type="OnLinkClicked"/>
+                    <xs:element name="OnLinkMouseUp"
+                                type="OnLinkMouseUp"/>
+                    <xs:element name="OnTextChanged"
+                                type="OnTextChanged"/>
+                    <xs:element name="OnUserAreaCreated"
+                                type="OnUserAreaCreated"/>
+                </xs:choice>
+                <xs:attribute name="color"
+                              type="string"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="font"
+                              type="string"/>
+                <xs:attribute name="horizontalAlignment"
+                              type="TextAlignment"/>
+                <xs:attribute name="lineSpacing"
+                              type="layout_measurement"/>
+                <xs:attribute name="linkEnabled"
+                              type="bool"/>
+                <xs:attribute name="maxLineCount"
+                              type="integer"/>
+                <xs:attribute name="minLineCount"
+                              type="integer"/>
+                <xs:attribute name="modifyTextType"
+                              type="ModifyTextType"/>
+                <xs:attribute name="newLineIndent"
+                              type="layout_measurement"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="shaderEffectType"
+                              type="ShaderEffectType"/>
+                <xs:attribute name="storeLineEndingCharacterIndices"
+                              type="bool"/>
+                <xs:attribute name="styleColor"
+                              type="string"/>
+                <xs:attribute name="text"
+                              type="string"/>
+                <xs:attribute name="verticalAlignment"
+                              type="TextAlignment"/>
+                <xs:attribute name="wrapMode"
+                              type="TextWrapMode"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Line">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="TextureCoords"
+                                type="TextureCoords"/>
+                </xs:choice>
+                <xs:attribute name="blendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="color"
+                              type="string"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="textureFile"
+                              type="string"/>
+                <xs:attribute name="thickness"
+                              type="layout_measurement"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="MapDisplay">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="MapGutter"
+                                type="MapGutter"/>
+                    <xs:element name="MapPinType"
+                                type="MapPinType"/>
+                    <xs:element name="OnVisibleRadiusChanged"
+                                type="OnVisibleRadiusChanged"/>
+                </xs:choice>
+                <xs:attribute name="pinFont"
+                              type="string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Polygon">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="Border"
+                                type="Border"/>
+                    <xs:element name="CenterTextureCoords"
+                                type="CenterTextureCoords"/>
+                </xs:choice>
+                <xs:attribute name="centerBlendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="centerColor"
+                              type="string"/>
+                <xs:attribute name="centerDesaturation"
+                              type="number"/>
+                <xs:attribute name="centerTextureAddressMode"
+                              type="TextureAddressMode"/>
+                <xs:attribute name="centerTextureFile"
+                              type="string"/>
+                <xs:attribute name="pointLayout"
+                              type="PolygonPointLayout"/>
+                <xs:attribute name="smoothingEnabled"
+                              type="bool"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Scroll">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="OnScrollExtentsChanged"
+                                type="OnScrollExtentsChanged"/>
+                    <xs:element name="OnScrollOffsetChanged"
+                                type="OnScrollOffsetChanged"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Slider">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="BackgroundBottom"
+                                type="BackgroundBottom"/>
+                    <xs:element name="BackgroundMiddle"
+                                type="BackgroundMiddle"/>
+                    <xs:element name="BackgroundTop"
+                                type="BackgroundTop"/>
+                    <xs:element name="Limits"
+                                type="Limits"/>
+                    <xs:element name="OnEnabledStateChanged"
+                                type="OnEnabledStateChanged"/>
+                    <xs:element name="OnSliderReleased"
+                                type="OnSliderReleased"/>
+                    <xs:element name="OnValueChanged"
+                                type="OnValueChanged"/>
+                    <xs:element name="ThumbTexture"
+                                type="ThumbTexture"/>
+                </xs:choice>
+                <xs:attribute name="dragFromThumb"
+                              type="bool"/>
+                <xs:attribute name="enabled"
+                              type="bool"/>
+                <xs:attribute name="orientation"
+                              type="ControlOrientation"/>
+                <xs:attribute name="step"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="StatusBar">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="LeadingEdge"
+                                type="LeadingEdge"/>
+                    <xs:element name="LeadingEdgeTextureCoords"
+                                type="LeadingEdgeTextureCoords"/>
+                    <xs:element name="Limits"
+                                type="Limits"/>
+                    <xs:element name="OnMinMaxValueChanged"
+                                type="OnMinMaxValueChanged"/>
+                    <xs:element name="OnValueChanged"
+                                type="OnValueChanged"/>
+                    <xs:element name="ScrollingOverlay"
+                                type="ScrollingOverlay"/>
+                    <xs:element name="TextureCoords"
+                                type="TextureCoords"/>
+                </xs:choice>
+                <xs:attribute name="barAlignment"
+                              type="BarAlignment"/>
+                <xs:attribute name="color"
+                              type="string"/>
+                <xs:attribute name="enableFadeOut"
+                              type="bool"/>
+                <xs:attribute name="fadeOutGainColor"
+                              type="string"/>
+                <xs:attribute name="fadeOutLossColor"
+                              type="string"/>
+                <xs:attribute name="fadeOutTextureFile"
+                              type="string"/>
+                <xs:attribute name="orientation"
+                              type="ControlOrientation"/>
+                <xs:attribute name="textureFile"
+                              type="string"/>
+                <xs:attribute name="value"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TextBuffer">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="LineFade"
+                                type="LineFade"/>
+                    <xs:element name="OnLinkClicked"
+                                type="OnLinkClicked"/>
+                    <xs:element name="OnLinkMouseUp"
+                                type="OnLinkMouseUp"/>
+                </xs:choice>
+                <xs:attribute name="drawLastEntryIfOutOfRoom"
+                              type="bool"/>
+                <xs:attribute name="font"
+                              type="string"/>
+                <xs:attribute name="horizontalAlignment"
+                              type="TextAlignment"/>
+                <xs:attribute name="linkEnabled"
+                              type="bool"/>
+                <xs:attribute name="maxHistoryLines"
+                              type="integer"/>
+                <xs:attribute name="splitLongMessages"
+                              type="bool"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Texture">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="LocalDimensions3D"
+                                type="LocalDimensions3D"/>
+                    <xs:element name="OnTextureLoaded"
+                                type="OnTextureLoaded"/>
+                    <xs:element name="TextureCoords"
+                                type="TextureCoords"/>
+                    <xs:element name="TextureSampleProcessingWeight"
+                                type="TextureSampleProcessingWeight"/>
+                </xs:choice>
+                <xs:attribute name="addressMode"
+                              type="TextureAddressMode"/>
+                <xs:attribute name="autoAdjustTextureCoords"
+                              type="bool"/>
+                <xs:attribute name="blendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="color"
+                              type="string"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="resizeToFitFile"
+                              type="bool"/>
+                <xs:attribute name="shaderEffectType"
+                              type="ShaderEffectType"/>
+                <xs:attribute name="textureCoordsRotation"
+                              type="number"/>
+                <xs:attribute name="textureFile"
+                              type="string"/>
+                <xs:attribute name="textureFileReleaseOption"
+                              type="ReleaseReferenceOptions"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TextureComposite">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="Surface"
+                                type="Surface"/>
+                </xs:choice>
+                <xs:attribute name="blendMode"
+                              type="TextureBlendMode"/>
+                <xs:attribute name="desaturation"
+                              type="number"/>
+                <xs:attribute name="pixelRoundingEnabled"
+                              type="bool"/>
+                <xs:attribute name="textureFile"
+                              type="string"/>
+                <xs:attribute name="textureFileReleaseOption"
+                              type="ReleaseReferenceOptions"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Tooltip">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                    <xs:element name="OnAddGameData"
+                                type="OnAddGameData"/>
+                    <xs:element name="OnCleared"
+                                type="OnCleared"/>
+                </xs:choice>
+                <xs:attribute name="font"
+                              type="string"/>
+                <xs:attribute name="headerRowSpacing"
+                              type="number"/>
+                <xs:attribute name="headerVerticalOffset"
+                              type="number"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TopLevelControl">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                </xs:choice>
+                <xs:attribute name="allowBringToTop"
+                              type="bool"/>
+                <xs:attribute name="topmost"
+                              type="bool"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- OnInsertAnimationTimelineCallback element types -->
+    <xs:complexType name="Callback">
+        <xs:annotation>
+            <xs:documentation>
+                local self, time = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnInsertAnimationTimelineCallback"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- OnSetAnimationEaseFunction element types -->
+    <xs:complexType name="EasingFunction">
+        <xs:annotation>
+            <xs:documentation>
+                local progress = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationEaseFunction"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- OnSetAnimationEventHandler element types -->
+    <xs:complexType name="OnPlay_Animation">
+        <xs:annotation>
+            <xs:documentation>
+                local self, animatingControl, completedPlaying = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnStop_Animation">
+        <xs:annotation>
+            <xs:documentation>
+                local self, animatingControl, completedPlaying = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- OnSetAnimationTimelineEventHandler element types -->
+    <xs:complexType name="OnDurationChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, duration = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationTimelineEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnPlay">
+        <xs:annotation>
+            <xs:documentation>
+                local self, completedPlaying = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationTimelineEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnStop">
+        <xs:annotation>
+            <xs:documentation>
+                local self, completedPlaying = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetAnimationTimelineEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- OnSetControlEventHandler element types -->
+    <xs:complexType name="OnAddGameData">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnBackspace">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnChar">
+        <xs:annotation>
+            <xs:documentation>
+                local self, key = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnCleared">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnClicked">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnColorSelected">
+        <xs:annotation>
+            <xs:documentation>
+                local self, r, g, b = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnDownArrow">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnDragStart">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnEffectivelyHidden">
+        <xs:annotation>
+            <xs:documentation>
+                local self, hidden = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnEffectivelyShown">
+        <xs:annotation>
+            <xs:documentation>
+                local self, hidden = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnEnabledStateChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, enabled = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnEnter">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnEscape">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnFocusGained">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnFocusLost">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnHide">
+        <xs:annotation>
+            <xs:documentation>
+                local self, hidden = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnIMEBeginComposition">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnIMEEndComposition">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnInitialized">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnKeyDown">
+        <xs:annotation>
+            <xs:documentation>
+                local self, key, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnKeyUp">
+        <xs:annotation>
+            <xs:documentation>
+                local self, key, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnLinkClicked">
+        <xs:annotation>
+            <xs:documentation>
+                local self, linkData, linkText, button, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnLinkMouseUp">
+        <xs:annotation>
+            <xs:documentation>
+                local self, linkData, linkText, button, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMinMaxValueChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, min, max = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseDoubleClick">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseDown">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseEnter">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseExit">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseUp">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button, upInside, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMouseWheel">
+        <xs:annotation>
+            <xs:documentation>
+                local self, delta, ctrl, alt, shift, command = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMoveStart">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnMoveStop">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnPageDown">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnPageUp">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnReceiveDrag">
+        <xs:annotation>
+            <xs:documentation>
+                local self, button = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnRectChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, newLeft, newTop, newRight, newBottom, oldLeft, oldTop, oldRight, oldBottom = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnRectHeightChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, newHeight, oldHeight = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnRectWidthChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, newWidth, oldWidth = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnResizeStart">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnResizeStop">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnResizedToFit">
+        <xs:annotation>
+            <xs:documentation>
+                local self, desiredWidth, desiredHeight = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnScrollExtentsChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, horizontal, vertical = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnScrollOffsetChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, horizontal, vertical = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnShow">
+        <xs:annotation>
+            <xs:documentation>
+                local self, hidden = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSliderReleased">
+        <xs:annotation>
+            <xs:documentation>
+                local self, value = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSpace">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnTab">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnTextChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnTextureLoaded">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnUpArrow">
+        <xs:annotation>
+            <xs:documentation>
+                local self = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnUpdate">
+        <xs:annotation>
+            <xs:documentation>
+                local self, time = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnUserAreaCreated">
+        <xs:annotation>
+            <xs:documentation>
+                local self, areaData, areaText, unscaledLeft, unscaledRight, unscaledTop, unscaledBottom, continuation = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnValueChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, value, eventReason = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnVisibleRadiusChanged">
+        <xs:annotation>
+            <xs:documentation>
+                local self, radius = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetControlEventHandler"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- OnSetUpdateFunction element types -->
+    <xs:complexType name="UpdateFunction">
+        <xs:annotation>
+            <xs:documentation>
+                local self, progress = ...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="OnSetUpdateFunction"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- element basetypes -->
+    <xs:group name="AnimationBaseTypeElements">
+        <xs:choice>
+            <xs:element name="EasingFunction"
+                        type="EasingFunction"/>
+            <xs:element name="OnPlay"
+                        type="OnPlay_Animation"/>
+            <xs:element name="OnStop"
+                        type="OnStop_Animation"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="AnimationBaseType">
+        <xs:attribute name="name"
+                      type="string"/>
+        <xs:attribute name="applyToChildControlName"
+                      type="string"/>
+        <xs:attribute name="delay"
+                      type="integer"/>
+        <xs:attribute name="duration"
+                      type="integer"/>
+        <xs:attribute name="enabled"
+                      type="bool"/>
+        <xs:attribute name="inherits"
+                      type="string"/>
+    </xs:complexType>
+    <xs:complexType name="AnimationBase">
+        <xs:complexContent>
+            <xs:extension base="AnimationBaseType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="AnimationBaseTypeElements"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:group name="ControlTypeElements">
+        <xs:choice>
+            <xs:element name="Anchor"
+                        type="Anchor"/>
+            <xs:element name="AnchorFill"
+                        type="AnchorFill"/>
+            <xs:element name="Caustic"
+                        type="Caustic"/>
+            <xs:element name="CircularClip"
+                        type="CircularClip"/>
+            <xs:element name="ClampedToScreenInsets"
+                        type="ClampedToScreenInsets"/>
+            <xs:element name="ClearAnchors"
+                        type="ClearAnchors"/>
+            <xs:element name="ClearClips"
+                        type="ClearClips"/>
+            <xs:element name="Controls"
+                        type="Controls"/>
+            <xs:element name="DimensionConstraints"
+                        type="DimensionConstraints"/>
+            <xs:element name="Dimensions"
+                        type="Dimensions"/>
+            <xs:element name="FadeGradient"
+                        type="FadeGradient"/>
+            <xs:element name="FlexMargin"
+                        type="FlexMargin"/>
+            <xs:element name="FlexPadding"
+                        type="FlexPadding"/>
+            <xs:element name="GaussianBlur"
+                        type="GaussianBlur"/>
+            <xs:element name="HitInsets"
+                        type="HitInsets"/>
+            <xs:element name="MotionBlur"
+                        type="MotionBlur"/>
+            <xs:element name="OnChar"
+                        type="OnChar"/>
+            <xs:element name="OnDragStart"
+                        type="OnDragStart"/>
+            <xs:element name="OnEffectivelyHidden"
+                        type="OnEffectivelyHidden"/>
+            <xs:element name="OnEffectivelyShown"
+                        type="OnEffectivelyShown"/>
+            <xs:element name="OnHide"
+                        type="OnHide"/>
+            <xs:element name="OnInitialized"
+                        type="OnInitialized"/>
+            <xs:element name="OnKeyDown"
+                        type="OnKeyDown"/>
+            <xs:element name="OnKeyUp"
+                        type="OnKeyUp"/>
+            <xs:element name="OnMouseDoubleClick"
+                        type="OnMouseDoubleClick"/>
+            <xs:element name="OnMouseDown"
+                        type="OnMouseDown"/>
+            <xs:element name="OnMouseEnter"
+                        type="OnMouseEnter"/>
+            <xs:element name="OnMouseExit"
+                        type="OnMouseExit"/>
+            <xs:element name="OnMouseUp"
+                        type="OnMouseUp"/>
+            <xs:element name="OnMouseWheel"
+                        type="OnMouseWheel"/>
+            <xs:element name="OnMoveStart"
+                        type="OnMoveStart"/>
+            <xs:element name="OnMoveStop"
+                        type="OnMoveStop"/>
+            <xs:element name="OnReceiveDrag"
+                        type="OnReceiveDrag"/>
+            <xs:element name="OnRectChanged"
+                        type="OnRectChanged"/>
+            <xs:element name="OnRectHeightChanged"
+                        type="OnRectHeightChanged"/>
+            <xs:element name="OnRectWidthChanged"
+                        type="OnRectWidthChanged"/>
+            <xs:element name="OnResizeStart"
+                        type="OnResizeStart"/>
+            <xs:element name="OnResizeStop"
+                        type="OnResizeStop"/>
+            <xs:element name="OnResizedToFit"
+                        type="OnResizedToFit"/>
+            <xs:element name="OnShow"
+                        type="OnShow"/>
+            <xs:element name="OnUpdate"
+                        type="OnUpdate"/>
+            <xs:element name="RadialBlur"
+                        type="RadialBlur"/>
+            <xs:element name="RectangularClip"
+                        type="RectangularClip"/>
+            <xs:element name="ResizeToFitPadding"
+                        type="ResizeToFitPadding"/>
+            <xs:element name="TransformOffset"
+                        type="TransformOffset"/>
+            <xs:element name="TransformOrigin"
+                        type="TransformOrigin"/>
+            <xs:element name="TransformRotation"
+                        type="TransformRotation"/>
+            <xs:element name="TransformScale"
+                        type="TransformScale"/>
+            <xs:element name="TransformSkew"
+                        type="TransformSkew"/>
+            <xs:element name="Wave"
+                        type="Wave"/>
+            <xs:element name="WaveBounds"
+                        type="WaveBounds"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="ControlType">
+        <xs:attribute name="name"
+                      type="string"/>
+        <xs:attribute name="virtual"
+                      type="bool"/>
+        <xs:attribute name="override"
+                      type="bool"/>
+        <xs:attribute name="accessControl"
+                      type="ControlAccessControl"/>
+        <xs:attribute name="alpha"
+                      type="number"/>
+        <xs:attribute name="autoRectClipChildren"
+                      type="bool"/>
+        <xs:attribute name="childLayout"
+                      type="ChildLayoutType"/>
+        <xs:attribute name="clampedToScreen"
+                      type="bool"/>
+        <xs:attribute name="excludeFromFlexContainer"
+                      type="bool"/>
+        <xs:attribute name="excludeFromResizeToFitExtents"
+                      type="bool"/>
+        <xs:attribute name="flex"
+                      type="number"/>
+        <xs:attribute name="flexBasis"
+                      type="number"/>
+        <xs:attribute name="flexContentAlignment"
+                      type="FlexAlignment"/>
+        <xs:attribute name="flexDirection"
+                      type="FlexDirection"/>
+        <xs:attribute name="flexGrow"
+                      type="number"/>
+        <xs:attribute name="flexItemAlignment"
+                      type="FlexAlignment"/>
+        <xs:attribute name="flexJustification"
+                      type="FlexJustification"/>
+        <xs:attribute name="flexSelfAlignment"
+                      type="FlexAlignment"/>
+        <xs:attribute name="flexShrink"
+                      type="number"/>
+        <xs:attribute name="flexWrap"
+                      type="FlexWrap"/>
+        <xs:attribute name="hidden"
+                      type="bool"/>
+        <xs:attribute name="id"
+                      type="integer"/>
+        <xs:attribute name="inheritAlpha"
+                      type="bool"/>
+        <xs:attribute name="inheritScale"
+                      type="bool"/>
+        <xs:attribute name="inherits"
+                      type="string"/>
+        <xs:attribute name="keyboardEnabled"
+                      type="bool"/>
+        <xs:attribute name="layer"
+                      type="DrawLayer"/>
+        <xs:attribute name="level"
+                      type="integer"/>
+        <xs:attribute name="maskMode"
+                      type="ControlMaskMode"/>
+        <xs:attribute name="maskTextureFile"
+                      type="string"/>
+        <xs:attribute name="maskTextureFileReleaseOption"
+                      type="ReleaseReferenceOptions"/>
+        <xs:attribute name="maskThresholdNormalizedThickness"
+                      type="number"/>
+        <xs:attribute name="maskThresholdNormalizedZeroAlphaEdge"
+                      type="number"/>
+        <xs:attribute name="mouseEnabled"
+                      type="bool"/>
+        <xs:attribute name="movable"
+                      type="bool"/>
+        <xs:attribute name="resizeHandleSize"
+                      type="number"/>
+        <xs:attribute name="resizeToFitConstrains"
+                      type="AnchorConstrains"/>
+        <xs:attribute name="resizeToFitDescendents"
+                      type="bool"/>
+        <xs:attribute name="scale"
+                      type="number"/>
+        <xs:attribute name="shape"
+                      type="ShapeType"/>
+        <xs:attribute name="space"
+                      type="Space"/>
+        <xs:attribute name="tier"
+                      type="DrawTier"/>
+    </xs:complexType>
+    <xs:complexType name="Control">
+        <xs:complexContent>
+            <xs:extension base="ControlType">
+                <xs:choice minOccurs="0"
+                           maxOccurs="unbounded">
+                    <xs:group ref="ControlTypeElements"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OnInsertAnimationTimelineCallback">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="delay"
+                              type="integer"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSetAnimationEaseFunction">
+        <xs:simpleContent>
+            <xs:extension base="xs:string"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSetAnimationEventHandler">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name"
+                              type="string"/>
+                <xs:attribute name="order"
+                              type="ControlHandlerOrder"/>
+                <xs:attribute name="targetName"
+                              type="string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSetAnimationTimelineEventHandler">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name"
+                              type="string"/>
+                <xs:attribute name="order"
+                              type="ControlHandlerOrder"/>
+                <xs:attribute name="targetName"
+                              type="string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSetControlEventHandler">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name"
+                              type="string"/>
+                <xs:attribute name="order"
+                              type="ControlHandlerOrder"/>
+                <xs:attribute name="targetName"
+                              type="string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="OnSetUpdateFunction">
+        <xs:simpleContent>
+            <xs:extension base="xs:string"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- other elements -->
+    <xs:complexType name="Font">
+        <xs:attribute name="name"
+                      type="string"/>
+        <xs:attribute name="virtual"
+                      type="bool"/>
+        <xs:attribute name="font"
+                      type="string"/>
+        <xs:attribute name="inherits"
+                      type="string"/>
+    </xs:complexType>
+    <xs:complexType name="String">
+        <xs:attribute name="name"
+                      type="string"/>
+        <xs:attribute name="value"
+                      type="string"/>
+    </xs:complexType>
+    <!-- container elements -->
+    <xs:complexType name="Controls">
+        <xs:choice minOccurs="0"
+                   maxOccurs="unbounded">
+            <xs:element name="Backdrop"
+                        type="Backdrop"/>
+            <xs:element name="Button"
+                        type="Button"/>
+            <xs:element name="ColorSelect"
+                        type="ColorSelect"/>
+            <xs:element name="Compass"
+                        type="Compass"/>
+            <xs:element name="Control"
+                        type="Control"/>
+            <xs:element name="Cooldown"
+                        type="Cooldown"/>
+            <xs:element name="DebugText"
+                        type="DebugText"/>
+            <xs:element name="EditBox"
+                        type="EditBox"/>
+            <xs:element name="Label"
+                        type="Label"/>
+            <xs:element name="Line"
+                        type="Line"/>
+            <xs:element name="MapDisplay"
+                        type="MapDisplay"/>
+            <xs:element name="Polygon"
+                        type="Polygon"/>
+            <xs:element name="Scroll"
+                        type="Scroll"/>
+            <xs:element name="Slider"
+                        type="Slider"/>
+            <xs:element name="StatusBar"
+                        type="StatusBar"/>
+            <xs:element name="TextBuffer"
+                        type="TextBuffer"/>
+            <xs:element name="Texture"
+                        type="Texture"/>
+            <xs:element name="TextureComposite"
+                        type="TextureComposite"/>
+            <xs:element name="Tooltip"
+                        type="Tooltip"/>
+            <xs:element name="TopLevelControl"
+                        type="TopLevelControl"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="Callbacks">
+        <xs:choice minOccurs="0"
+                   maxOccurs="unbounded">
+            <xs:element name="Callback"
+                        type="Callback"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="AnimationTimeline">
+        <xs:choice minOccurs="0"
+                   maxOccurs="unbounded">
+            <xs:element name="Animations"
+                        type="Animations"/>
+            <xs:element name="Callbacks"
+                        type="Callbacks"/>
+            <xs:element name="OnDurationChanged"
+                        type="OnDurationChanged"/>
+            <xs:element name="OnPlay"
+                        type="OnPlay"/>
+            <xs:element name="OnStop"
+                        type="OnStop"/>
+        </xs:choice>
+        <xs:attribute name="name"
+                      type="string"/>
+        <xs:attribute name="delay"
+                      type="integer"/>
+        <xs:attribute name="enabled"
+                      type="bool"/>
+        <xs:attribute name="inherits"
+                      type="string"/>
+        <xs:attribute name="loopCount"
+                      type="string"/>
+        <xs:attribute name="minDuration"
+                      type="integer"/>
+        <xs:attribute name="playbackType"
+                      type="AnimationPlayback"/>
+    </xs:complexType>
+    <xs:complexType name="Animations">
+        <xs:choice minOccurs="0"
+                   maxOccurs="unbounded">
+            <xs:element name="AlphaAnimation"
+                        type="AlphaAnimation"/>
+            <xs:element name="AnimationTimeline"
+                        type="AnimationTimeline"/>
+            <xs:element name="ColorAnimation"
+                        type="ColorAnimation"/>
+            <xs:element name="CustomAnimation"
+                        type="CustomAnimation"/>
+            <xs:element name="DesaturationAnimation"
+                        type="DesaturationAnimation"/>
+            <xs:element name="Rotate3DAnimation"
+                        type="Rotate3DAnimation"/>
+            <xs:element name="ScaleAnimation"
+                        type="ScaleAnimation"/>
+            <xs:element name="SizeAnimation"
+                        type="SizeAnimation"/>
+            <xs:element name="TextureAnimation"
+                        type="TextureAnimation"/>
+            <xs:element name="TextureRotateAnimation"
+                        type="TextureRotateAnimation"/>
+            <xs:element name="TextureSlideAnimation"
+                        type="TextureSlideAnimation"/>
+            <xs:element name="TransformOffsetAnimation"
+                        type="TransformOffsetAnimation"/>
+            <xs:element name="TransformRotationAnimation"
+                        type="TransformRotationAnimation"/>
+            <xs:element name="TransformScaleAnimation"
+                        type="TransformScaleAnimation"/>
+            <xs:element name="TransformSkewAnimation"
+                        type="TransformSkewAnimation"/>
+            <xs:element name="Translate3DAnimation"
+                        type="Translate3DAnimation"/>
+            <xs:element name="TranslateAnimation"
+                        type="TranslateAnimation"/>
+        </xs:choice>
+    </xs:complexType>
+    <!-- root element -->
+    <xs:complexType name="GuiXmlType">
+        <xs:choice minOccurs="0"
+                   maxOccurs="unbounded">
+            <xs:element name="Animations"
+                        type="Animations"/>
+            <xs:element name="BackupFont"
+                        type="BackupFont"/>
+            <xs:element name="Controls"
+                        type="Controls"/>
+            <xs:element name="Font"
+                        type="Font"/>
+            <xs:element name="String"
+                        type="String"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="GuiXml"
+                type="GuiXmlType"/>
+</xs:schema>
