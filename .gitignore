@@ -45,3 +45,4 @@ luac.out
 
 .vscode/*
 resources/*.xsd
+.editorconfig
