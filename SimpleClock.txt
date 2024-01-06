@@ -1,8 +1,8 @@
 ## Title: SimpleClock
 ## APIVersion: 101040 101041
 ## Author: @moshulu
-## Version: 0.0.3
-## AddOnVersion: 3
+## Version: 0.0.4
+## AddOnVersion: 4
 ## DependsOn: LibAddonMenu-2.0>=35
 ## OptionalDependsOn: LibSlashCommander>=36
 ## SavedVariables: SimpleClockVars
