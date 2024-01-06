@@ -12,11 +12,13 @@
 ## All rights reserved
 ##
 ## You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
-#
+
 # Load language texts depending on the client's language.
-lang/en.lua           ; Standard language file, always loaded
-lang/$(language).lua  ; de.lua/fr.lua, ...: Loaded if the client is using this language
+lang/en.lua           
+lang/$(language).lua
+
 # SimpleClock base functions and code.
 SimpleClock.lua
+
 # SimpleClock XML.
 SimpleClock.xml
