@@ -1,12 +1,24 @@
 ## Title: SimpleClock
-## APIVersion: 101039
+## APIVersion: 101040 101041
 ## Author: @moshulu
-
-## DependsOn: LibAddonMenu-2.0
+## Version: 0.0.3
+## AddOnVersion: 3
+## DependsOn: LibAddonMenu-2.0>=35
+## OptionalDependsOn: LibSlashCommander>=36
 ## SavedVariables: SimpleClockVars
+##
+## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
+## The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries.
+## All rights reserved
+##
+## You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
 
-lang/en.lua
+# Load language texts depending on the client's language.
+lang/en.lua           
 lang/$(language).lua
 
+# SimpleClock base functions and code.
 SimpleClock.lua
+
+# SimpleClock XML.
 SimpleClock.xml
