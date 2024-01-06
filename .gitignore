@@ -43,4 +43,5 @@ luac.out
 *.x86_64
 *.hex
 
-.vscode/settings.json
+.vscode/*
+resources/*.xsd
