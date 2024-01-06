@@ -1,0 +1,17 @@
+{
+  "Lua.workspace.maxPreload": 20000,
+  "Lua.workspace.preloadFileSize": 20000,
+  "Lua.workspace.userThirdParty": [
+      "/root/vscode-eso-env/esoui_library/esoui/config.lua"
+  ],
+  "Lua.runtime.plugin": "/root/vscode-eso-env/esoui_library/esoui/plugin.lua",
+  "Lua.workspace.library": [
+      "/root/vscode-eso-env/",
+  ],
+  "xml.fileAssociations": [
+    {
+      "pattern": "**/SimpleClock.xml",
+      "systemId": "resources/esoui101040.xsd"
+    }
+  ]
+}
